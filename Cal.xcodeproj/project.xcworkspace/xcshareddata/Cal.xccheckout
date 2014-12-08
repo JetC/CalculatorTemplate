@@ -10,6 +10,8 @@
 	<string>Cal</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>6E3F07969C1933390F767833BF45150CF9CB336E</key>
+		<string>https://github.com/SunPeifeng/CalculatorTemplate.git</string>
 		<key>E0339817A0AF6B8A1711F5D4635797B8757F65A1</key>
 		<string>https://github.com/wyh454412805/Cal.git</string>
 	</dict>
@@ -17,15 +19,17 @@
 	<string>Cal.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>E0339817A0AF6B8A1711F5D4635797B8757F65A1</key>
+		<key>6E3F07969C1933390F767833BF45150CF9CB336E</key>
 		<string>../..</string>
+		<key>E0339817A0AF6B8A1711F5D4635797B8757F65A1</key>
+		<string>../../../Cal_WYH</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/wyh454412805/Cal.git</string>
+	<string>https://github.com/SunPeifeng/CalculatorTemplate.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>E0339817A0AF6B8A1711F5D4635797B8757F65A1</string>
+	<string>6E3F07969C1933390F767833BF45150CF9CB336E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -35,6 +39,14 @@
 			<string>E0339817A0AF6B8A1711F5D4635797B8757F65A1</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Cal_WYH</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6E3F07969C1933390F767833BF45150CF9CB336E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CalculatorTemplate</string>
 		</dict>
 	</array>
 </dict>
