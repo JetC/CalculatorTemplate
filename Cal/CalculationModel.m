@@ -40,84 +40,40 @@
     }
     //存到类的实例变量里
     self.operatorArray = operatorsArray;
-    for (NSInteger i = 0; i < self.operatorArray.count; i++) {
+    double temResult = 0.0;
+    NSInteger i = 0;
+    
+    if ([self.operatorArray[i] isEqualToString:@"*"] ) {
         
-        double tempResult = 0.0;
-        
-        if ([self.operatorArray[i] isEqualToString:@"*"]) {
-            
-                if ([self.operatorArray[i+1] isEqualToString:@"*"]||[self.operatorArray[i+1] isEqualToString:@"/"]){
-                    for (NSInteger n = 0;[self.operatorArray[i+1] isEqualToString:@"*"]||[self.operatorArray[i+1] isEqualToString:@"/"] ; n++) {
-                        
-
-                    tempResult = [self.numbersArray[i] doubleValue]*[self.numbersArray[i+1] doubleValue];
-                    self.numbersArray[i] = [NSString stringWithFormat:@"%lf",tempResult];
-                    [self.numbersArray removeObjectAtIndex:i+1];
-                    }
-                }
-            
-                else if ([self.operatorArray[i+1] isEqualToString:@"+"] || [self.operatorArray[i+1] isEqualToString:@"-"]) {
-                    tempResult = [self.numbersArray[i] doubleValue]*[self.numbersArray[i+1] doubleValue];
-                    self.numbersArray[i] = [NSString stringWithFormat:@"%lf",tempResult];
-                    [self.numbersArray removeObjectAtIndex:i+1];
-                    [self.operatorArray removeObjectAtIndex:i];
-                    
-                }
-
-            
-        
-        
-        else if ([self.operatorArray[i] isEqualToString:@"/"]) {
-            for (NSInteger n = 0;[self.operatorArray[i+1] isEqualToString:@"*"]||[self.operatorArray[i+1] isEqualToString:@"/"] ; n++) {
-                
-                
-                if ([self.operatorArray[i+1] isEqualToString:@"+"] || [self.operatorArray[i+1] isEqualToString:@"-"]) {
-                    tempResult = [self.numbersArray[i] doubleValue]/[self.numbersArray[i+1] doubleValue];
-                    self.numbersArray[i] = [NSString stringWithFormat:@"%lf",tempResult];
-                    [self.numbersArray removeObjectAtIndex:i+1];
-                    [self.operatorArray removeObjectAtIndex:i+n];
-                    
-                }
-                else if ([self.operatorArray[i+1] isEqualToString:@"*"]||[self.operatorArray[i+1] isEqualToString:@"/"]){
-                    tempResult = [self.numbersArray[i] doubleValue]/[self.numbersArray[i+1] doubleValue];
-                    self.numbersArray[i] = [NSString stringWithFormat:@"%lf",tempResult];
-                    [self.numbersArray removeObjectAtIndex:i+1];
-                }
-                tempResult = [self.numbersArray[i] doubleValue]*[self.numbersArray[i+1] doubleValue];
-                self.numbersArray[i] = [NSString stringWithFormat:@"%lf",tempResult];
-                [self.numbersArray removeObjectAtIndex:i+1];
-            }
-        }
-        
-        
-    }
-    }
-    for (NSInteger i = 0; i < self.operatorArray.count; i++) {
-        
-        double tempResult = 0.0;
-        
-        if ([self.operatorArray[i] isEqualToString:@"+"]) {
-            tempResult = [self.numbersArray[i] doubleValue]+[self.numbersArray[i+1] doubleValue];
-            self.numbersArray[i] = [NSString stringWithFormat:@"%lf",tempResult];
-            [self.numbersArray removeObjectAtIndex:i+1];
-            [self.operatorArray removeObjectAtIndex:i];
-        }
-        for (NSInteger i = 0; i < self.operatorArray.count; i++) {
-            
-            double tempResult = 0.0;
-            
-            if ([self.operatorArray[i] isEqualToString:@"-"]) {
-                tempResult = [self.numbersArray[i] doubleValue]-[self.numbersArray[i+1] doubleValue];
-                self.numbersArray[i] = [NSString stringWithFormat:@"%lf",tempResult];
+            for (NSInteger i = 0; [self.operatorArray[i+1] isEqualToString:@"*"] || [self.operatorArray[i+1] isEqualToString:@"/"]; i=i){
+                temResult = [self.numbersArray[i]doubleValue]*[self.numbersArray[i+1]doubleValue];
+                self.numbersArray[i] = [NSString stringWithFormat:@"%lf",temResult];
                 [self.numbersArray removeObjectAtIndex:i+1];
                 [self.operatorArray removeObjectAtIndex:i];
             }
-            
+        
+    
+            for ( ; i < self.operatorArray.count;i++){
+                temResult = [self.numbersArray[i] doubleValue]*[self.numbersArray[i+1] doubleValue];
+                self.numbersArray[i] = [NSString stringWithFormat:@"%lf",temResult];
+                [self.numbersArray removeObjectAtIndex:i+1];
+                [self.operatorArray removeObjectAtIndex:i];
+            }
+    }
+    else if ([self.operatorArray[i] isEqualToString:@"+"] ){
+        for ( ; i < self.operatorArray.count;){
+            temResult = [self.numbersArray[i] doubleValue]+[self.numbersArray[i+1] doubleValue];
+            self.numbersArray[i] = [NSString stringWithFormat:@"%lf",temResult];
+            [self.numbersArray removeObjectAtIndex:i+1];
+            [self.operatorArray removeObjectAtIndex:i];
+
+
+        }
         
     }
-    }
     
-    /**
+    
+        /**
      
      至此,我们在@property内部拥有了两个 MutableArray, 一个存储了全部的数字,另一个存储了全部的运算符
      在下一步的计算中,加减和乘除,推荐先做乘除,再做加减.其中乘除里要考虑多个数字连乘时要怎么处理
