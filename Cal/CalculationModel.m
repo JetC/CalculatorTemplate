@@ -40,40 +40,35 @@
     }
     //存到类的实例变量里
     self.operatorArray = operatorsArray;
-    double temResult = 0.0;
+    double tempResult1 = 0.0;
+    double tempResult = 0.0;
+    Boolean Finished;
     NSInteger i = 0;
-    
-    if ([self.operatorArray[i] isEqualToString:@"*"] ) {
-        
-            for (NSInteger i = 0; [self.operatorArray[i+1] isEqualToString:@"*"] || [self.operatorArray[i+1] isEqualToString:@"/"]; i=i){
-                temResult = [self.numbersArray[i]doubleValue]*[self.numbersArray[i+1]doubleValue];
-                self.numbersArray[i] = [NSString stringWithFormat:@"%lf",temResult];
-                [self.numbersArray removeObjectAtIndex:i+1];
-                [self.operatorArray removeObjectAtIndex:i];
-            }
-        
-    
-            for ( ; i < self.operatorArray.count;i++){
-                temResult = [self.numbersArray[i] doubleValue]*[self.numbersArray[i+1] doubleValue];
-                self.numbersArray[i] = [NSString stringWithFormat:@"%lf",temResult];
-                [self.numbersArray removeObjectAtIndex:i+1];
-                [self.operatorArray removeObjectAtIndex:i];
-            }
+    if ([self.operatorArray[i] isEqualToString:@"*"] & [self.operatorArray[i+1] isEqualToString:@"+"]) {
+        Finished = YES;
     }
-    else if ([self.operatorArray[i] isEqualToString:@"+"] ){
-        for ( ; i < self.operatorArray.count;){
-            temResult = [self.numbersArray[i] doubleValue]+[self.numbersArray[i+1] doubleValue];
-            self.numbersArray[i] = [NSString stringWithFormat:@"%lf",temResult];
-            [self.numbersArray removeObjectAtIndex:i+1];
-            [self.operatorArray removeObjectAtIndex:i];
-
-
+    for ( i=0; i < self.operatorArray.count;i++){
+        if ([self.operatorArray[i] isEqualToString:@"*"] ) {
+            if ((Finished = YES)){
+                tempResult = [self multiWithIndex:i];
+            }
+            else{
+                tempResult = [self multiWithIndex:i];
+                tempResult1 = tempResult1  + tempResult;
+            }
         }
-        
+    }
+    for ( ; i < self.operatorArray.count;i++){
+        if ([self.operatorArray[i] isEqualToString:@"*"]){
+           tempResult1 = [self addiWithIndex:i];
+        }
     }
     
     
-        /**
+    
+    
+    
+    /**
      
      至此,我们在@property内部拥有了两个 MutableArray, 一个存储了全部的数字,另一个存储了全部的运算符
      在下一步的计算中,加减和乘除,推荐先做乘除,再做加减.其中乘除里要考虑多个数字连乘时要怎么处理
@@ -106,7 +101,30 @@
     //取array里的第1个元素,就是我们刚才存入的NSNumber类型的量,对其使用floatValue方法即得到 double 类型的值
     i2 = [[array objectAtIndex:0] doubleValue];
 }
+
+- (double)multiWithIndex:(NSInteger)index
+{
+    double tempResult = 0;
+    tempResult = [self.numbersArray[index] doubleValue]*[self.numbersArray[index+1] doubleValue];
+    self.numbersArray[index] = [NSString stringWithFormat:@"%lf",tempResult];
+    [self.numbersArray removeObjectAtIndex:index+1];
+    [self.operatorArray removeObjectAtIndex:index];
+    return tempResult;
+}
+- (double)addiWithIndex:(NSInteger)index
+{
+    double tempResult1 = 0;
+    tempResult1 = [self.numbersArray[index] doubleValue]+[self.numbersArray[index+1] doubleValue];
+    self.numbersArray[index] = [NSString stringWithFormat:@"%lf",tempResult1];
+    [self.numbersArray removeObjectAtIndex:index+1];
+    [self.operatorArray removeObjectAtIndex:index];
+    return tempResult1;
+}
+
+
+
 @end
+
 
 
 
