@@ -59,7 +59,7 @@
         }
     }
     for ( ; i < self.operatorArray.count;i++){
-        if ([self.operatorArray[i] isEqualToString:@"*"]){
+        if ([self.operatorArray[i] isEqualToString:@"＋"]){
            tempResult1 = [self addiWithIndex:i];
         }
     }
